@@ -8,61 +8,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent-IT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo">Rent-IT</div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Voertuigen</a>
-            <a href="#">Abonnementen</a>
-            <a href="#">Contact</a>
-            <a href="#">Sign up</a>
-            <a href="#">&#x279C;</a>
-        </nav>
-    </header>
+<!-- Carousel Section -->
+<section class="container my-5">
+    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
 
-    <section class="carousel">
-        <p>roterende fotos van voertuigen hier (carousel)</p>
-    </section>
+        <!-- Carousel Items -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="path/to/car1.jpg" class="d-block w-100" alt="Car 1">
+            </div>
+            <div class="carousel-item">
+                <img src="path/to/car2.jpg" class="d-block w-100" alt="Car 2">
+            </div>
+            <div class="carousel-item">
+                <img src="path/to/car3.jpg" class="d-block w-100" alt="Car 3">
+            </div>
+        </div>
 
-    <div class="button">
-        <a href="#">Bestel nu</a>
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+
+<!-- Call to Action Button -->
+    <div class="text-center my-4">
+        <a href="#" class="btn btn-success">Bestel nu</a>
     </div>
 
-    <section class="info-section">
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
-        </div>
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
-        </div>
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
-        </div>
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
-        </div>
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
-        </div>
-        <div class="info-item">
-            <i>ℹ️</i>
-            <h3>Title</h3>
-            <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+    <!-- Info Section -->
+    <section class="container text-center py-4">
+        <h2>Heading</h2>
+        <p class="text-muted">Subheading</p>
+        <div class="row">
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="col-md-4 col-lg-2 mb-4">
+                <i class="bi bi-info-circle fs-1 text-success"></i>
+                <h5>Title</h5>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
         </div>
     </section>
-    <div id="react-root"></div> <!-- This is where React will render its content -->
+
     <footer>
         <div class="footer-icons">
             <a href="#">🌐</a>
@@ -103,6 +130,5 @@
             </div>
         </div>
     </footer>
-    <script src="~/js/bundle.js"></script> <!-- Update the path to match your setup -->
 </body>
 </html>
