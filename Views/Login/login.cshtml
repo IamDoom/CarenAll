@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;  // No layout for this page
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <!-- React will render the login, signup, or forgot password components here -->
+        <div id="login-container"></div>
+    </div>
+
+    <!-- Include the React bundle script -->
+    <script src="~/wwwroot/js/bundle.js"></script>
+
+    <script>
+        // Mount the React Login component when the page is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            const rootElement = document.getElementById('login-container');
+            if (rootElement) {
+                // This assumes React and ReactDOM are globally available and Login is exported
+                ReactDOM.render(
+                    React.createElement(Login),
+                    rootElement
+                );
+            }
+        });
+    </script>
+</body>
+</html>

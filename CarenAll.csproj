@@ -6,4 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Login\login.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="clientapp\src\api\" />
+    <Folder Include="Views\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Login\login.cshtml" />
+  </ItemGroup>
+
 </Project>
