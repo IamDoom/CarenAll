@@ -39,6 +39,7 @@ module.exports = {
             },
             {
                 directory: path.resolve(__dirname, 'clientapp'),  // Additional static files directory
+                publicPath: '/clientapp',
             }
         ],
         hot: true,  // Enable Hot Module Replacement (HMR)
