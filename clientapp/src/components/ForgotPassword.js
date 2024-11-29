@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import './authStyles.css'; // Import the CSS file
+import '/wwwroot/css/authStyles.css';
 
 function ForgotPassword({ onBack }) {
     return (

@@ -4,11 +4,14 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 
 module.exports = {
-    mode: 'development', // Ensure you are in development mode for HMR
-    entry: './clientapp/src/index.js',  // entry point for React
+    mode: 'development',
+    entry: {
+        login: './clientapp/src/LoginIndex.js', // Entry for the Login page (Login SPA)
+        app: './clientapp/src/index.js',         // Entry for the main app
+    },
     output: {
-        path: path.resolve(__dirname, 'wwwroot/js'),  // output to wwwroot/js folder
-        filename: 'bundle.js',  // bundle file name
+        path: path.resolve(__dirname, 'wwwroot/js'), // Output both bundles to the same directory
+        filename: '[name].bundle.js', // Use [name] to generate separate bundles (login.bundle.js and app.bundle.js)
         clean: true,
     },
     watch: true,
@@ -26,6 +29,10 @@ module.exports = {
                         ],
                     },
                 },
+            },
+            {
+                test: /\.css$/, // Add a CSS loader
+                use: ['style-loader', 'css-loader'], // Ensure CSS files are loaded
             },
         ],
     },

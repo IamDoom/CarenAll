@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="clientapp\src\components\login.js" />
     <None Remove="webpack.config.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="clientapp\src\components\login.js" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
