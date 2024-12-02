@@ -24,9 +24,9 @@ function Login({ onChangeView }) {
                 >
                     Forgot Password?
                 </button>
-                <button>
+                <button
                     type="button"
-                    className="secondary"
+                    className="secondary" 
                     onClick={() => onChangeView('signup')} 
                 >
                     Sign Up
