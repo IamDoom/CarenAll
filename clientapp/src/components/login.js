@@ -23,7 +23,7 @@ function Login({ onChangeView }) {
                     onClick={() => onChangeView('forgotPassword')} 
                 >
                     Forgot Password?
-                </button>
+                </button> 
                 <button
                     type="button"
                     className="secondary" 

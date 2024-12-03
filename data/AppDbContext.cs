@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace CarenAll;
+namespace CarenAll.data;
 
 public class AppDbContext : DbContext
 {

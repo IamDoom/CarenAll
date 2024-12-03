@@ -1,4 +1,4 @@
-using CarenAll;
+using CarenAll.data;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
