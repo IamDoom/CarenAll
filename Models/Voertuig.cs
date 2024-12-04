@@ -21,6 +21,9 @@ public class Voertuigen
 
     [Required]
     public int Aanschafjaar { get; set; }
+
+    public User InUseBy { get; set; }
+    public string State { get; set; }
 }
 
 public class Auto : Voertuigen

@@ -9,22 +9,60 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+    // voertuigen DbSet
     public DbSet<Auto> Autos { get; set; }
     public DbSet<Camper> Campers { get; set; }
     public DbSet<Caravan> Caravans { get; set; }
 
-    // Toevoegen van de Customers DbSet
-    public DbSet<Customer> Customers { get; set; }
+    // Toevoegen van de gebruikers DbSet
+    public DbSet<User> Users { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<PrivateClient> PrivateClients { get; set; }
+    public DbSet<CompanyEmployee> CompanyEmployees { get; set; }
+    public DbSet<Company> Companies { get; set; }
+
+    // Abbonnementen
+    public DbSet<Subscription> Subscriptions { get; set; }
+    public DbSet<SubscriptionUpdate> SubscriptionUpdates { get; set; }
+
+    // 
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.Entity<Voertuigen>()
             .HasDiscriminator<string>("VoertuigType")
             .HasValue<Auto>("Auto")
             .HasValue<Camper>("Camper")
             .HasValue<Caravan>("Caravan");
 
+        modelBuilder.Entity<User>()
+            .HasDiscriminator<string>("UserType")
+            .HasValue<User>("User")
+            .HasValue<Employee>("Employee")
+            .HasValue<PrivateClient>("PrivateClient")
+            .HasValue<CompanyEmployee>("CompanyEmployee")
+            .HasValue<Company>("Company");
+
+        modelBuilder.Entity<Company>()
+            .HasMany(c => c.CompanyEmployees)
+            .WithOne(ce => ce.company)
+            .HasForeignKey(ce => ce.CompanyID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<CompanyEmployee>()
+            .HasOne(ce => ce.company)
+            .WithMany(c => c.CompanyEmployees)
+            .HasForeignKey(ce => ce.CompanyID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Subscription>()
+            .HasMany(s => s.UpdateHistory)
+            .WithOne() // Each SubscriptionUpdate refers to one Subscription
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Auto>().HasData(
             new Auto { Id = 1, Merk = "Toyota", Type = "Corolla", Kenteken = "AB-123-CD", Kleur = "Rood", Aanschafjaar = 2018 },
