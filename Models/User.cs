@@ -4,14 +4,15 @@
     {
     
         public int Id { get; set; } //primary key
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+
         public string Email { get; set; }
         
     }
     public class Employee : User
     {
         public string EmployeeID { get; set; } // unique
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Role { get; set; }
 
     }
@@ -19,16 +20,20 @@
     public class PrivateClient : User
     {
         public string PrivateID { get; set; } // unique
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string PhoneNumber { get; set; }
     }
 
     public class CompanyEmployee : User
     {
         public string CompanyID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Company company { get; set; }
     }
 
-    public class Company
+    public class Company: User
     {
 
         public string CompanyID { get; set; } // Primary key

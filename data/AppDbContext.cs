@@ -9,12 +9,12 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // voertuigen DbSet
+    // voertuigen
     public DbSet<Auto> Autos { get; set; }
     public DbSet<Camper> Campers { get; set; }
     public DbSet<Caravan> Caravans { get; set; }
 
-    // Toevoegen van de gebruikers DbSet
+    // gebruikers
     public DbSet<User> Users { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<PrivateClient> PrivateClients { get; set; }
@@ -25,8 +25,9 @@ public class AppDbContext : DbContext
     public DbSet<Subscription> Subscriptions { get; set; }
     public DbSet<SubscriptionUpdate> SubscriptionUpdates { get; set; }
 
-    // 
-
+    //formulieren
+    public DbSet<Leaserequest> LeaseRequests { get; set; }
+    public DbSet<DamageReport> DamageReports { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,7 +62,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Subscription>()
             .HasMany(s => s.UpdateHistory)
-            .WithOne() // Each SubscriptionUpdate refers to one Subscription
+            .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Auto>().HasData(
