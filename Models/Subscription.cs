@@ -17,7 +17,7 @@
     {
         public int UpdateID { get; set; }
         public DateTime UpdateTime { get; set; }
-        public String UpdatedByEmployeeID { get; set; } 
+        public string UpdatedByEmployeeID { get; set; } 
 
     }
 }

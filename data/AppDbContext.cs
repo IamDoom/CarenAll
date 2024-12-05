@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     // voertuigen
+    public DbSet<Voertuigen> Vehicles { get; set; }
     public DbSet<Auto> Autos { get; set; }
     public DbSet<Camper> Campers { get; set; }
     public DbSet<Caravan> Caravans { get; set; }
@@ -26,7 +27,7 @@ public class AppDbContext : DbContext
     public DbSet<SubscriptionUpdate> SubscriptionUpdates { get; set; }
 
     //formulieren
-    public DbSet<Leaserequest> LeaseRequests { get; set; }
+    public DbSet<LeaseRequest> LeaseRequests { get; set; }
     public DbSet<DamageReport> DamageReports { get; set; }
 
 
@@ -50,12 +51,18 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Company>()
             .HasMany(c => c.CompanyEmployees)
-            .WithOne(ce => ce.company)
-            .HasForeignKey(ce => ce.CompanyID)
-            .OnDelete(DeleteBehavior.Restrict);
+            .WithOne(ce => ce.Company)
+            .HasForeignKey(ce => ce.CompanyID) 
+            .OnDelete(DeleteBehavior.Restrict); 
+
+        modelBuilder.Entity<Company>()
+            .HasOne(c => c.Subscription)
+            .WithOne()
+            .HasForeignKey<Company>(c => c.SubscriptionID)
+            .OnDelete(DeleteBehavior.SetNull);
 
         modelBuilder.Entity<CompanyEmployee>()
-            .HasOne(ce => ce.company)
+            .HasOne(ce => ce.Company)
             .WithMany(c => c.CompanyEmployees)
             .HasForeignKey(ce => ce.CompanyID)
             .OnDelete(DeleteBehavior.Restrict);
@@ -64,6 +71,55 @@ public class AppDbContext : DbContext
             .HasMany(s => s.UpdateHistory)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<SubscriptionUpdate>()
+            .HasOne<Employee>()
+            .WithMany()
+            .HasForeignKey(su => su.UpdatedByEmployeeID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<LeaseRequest>()
+            .HasOne(lr => lr.Requestor)
+            .WithMany() 
+            .HasForeignKey(lr => lr.RequestorID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<LeaseRequest>()
+            .HasOne(lr => lr.Company)
+            .WithMany()
+            .HasForeignKey(lr => lr.CompanyID)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<LeaseRequest>()
+            .HasOne(lr => lr.Vehicle)
+            .WithMany()
+            .HasForeignKey(lr => lr.VehicleID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<LeaseRequest>()
+            .HasOne(lr => lr.Employee)
+            .WithMany() 
+            .HasForeignKey(lr => lr.EmployeeID)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<DamageReport>()
+            .HasOne(dr => dr.Vehicle)
+            .WithMany()
+            .HasForeignKey(dr => dr.VehicleID) 
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<DamageReport>()
+            .HasOne(dr => dr.Reporter)
+            .WithMany()
+            .HasForeignKey(dr => dr.ReporterID) 
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<DamageReport>()
+            .HasOne(dr => dr.Driver)
+            .WithMany() 
+            .HasForeignKey(dr => dr.DriverID) 
+            .OnDelete(DeleteBehavior.Restrict);
+
 
         modelBuilder.Entity<Auto>().HasData(
             new Auto { Id = 1, Merk = "Toyota", Type = "Corolla", Kenteken = "AB-123-CD", Kleur = "Rood", Aanschafjaar = 2018 },
