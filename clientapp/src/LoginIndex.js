@@ -6,14 +6,21 @@ import ForgotPassword from './components/ForgotPassword';
 
 function App() {
     const [currentView, setCurrentView] = useState('login');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const setError = (message) => {
+        setErrorMessage(message);
+    };
 
     return (
-        <div>
-            {currentView === 'login' && <Login onChangeView={setCurrentView} />}
-            {currentView === 'signup' && <SignUp onBack={() => setCurrentView('login')} />}
+        <div className="auth-container">
+            {currentView === 'login' && <Login onChangeView={setCurrentView} setError={setError} />}
+            {currentView === 'signup' && <SignUp onBack={() => setCurrentView('login')} setError={setError} />}
             {currentView === 'forgotPassword' && (
-                <ForgotPassword onBack={() => setCurrentView('login')} />
+                <ForgotPassword onBack={() => setCurrentView('login')} setError={setError} />
             )}
+
+            {errorMessage && <div className="error-message">{errorMessage}</div>}  {/* Display any errors */}
         </div>
     );
 }

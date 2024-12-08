@@ -1,11 +1,23 @@
 ﻿import React from 'react';
 import '/wwwroot/css/authStyles.css';
 
-function Login({ onChangeView }) {
+function Login({ onChangeView, setError }) {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        
+        const response = await fetch('/api/login');
+        if (response.ok) {
+            
+            window.location.href = '/index';
+        } else {
+            setError('Invalid username or password');
+        }
+    };
+
     return (
         <div className="auth-container">
             <h2>Login</h2>
-            <form className="auth-form">
+            <form className="auth-form" onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" name="username" />
@@ -16,18 +28,19 @@ function Login({ onChangeView }) {
                 </div>
                 <button type="submit">Log In</button>
             </form>
+
             <div className="auth-button-group">
                 <button
                     type="button"
                     className="secondary"
-                    onClick={() => onChangeView('forgotPassword')} 
+                    onClick={() => onChangeView('forgotPassword')}
                 >
                     Forgot Password?
-                </button> 
+                </button>
                 <button
                     type="button"
-                    className="secondary" 
-                    onClick={() => onChangeView('signup')} 
+                    className="secondary"
+                    onClick={() => onChangeView('signup')}
                 >
                     Sign Up
                 </button>
