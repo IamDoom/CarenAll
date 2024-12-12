@@ -1,79 +1,158 @@
 ﻿/* Container styles */
 .auth-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
 }
 
-/* Form styles */
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+    /* Form styles */
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
     /* Label styles */
     .auth-form label {
         font-size: 14px;
         font-weight: bold;
         margin-bottom: 5px;
+        color: #333;
     }
 
-    /* Input styles */
+    /* Input fields */
     .auth-form input[type="text"],
     .auth-form input[type="password"],
     .auth-form input[type="email"] {
-        padding: 10px;
+        padding: 12px;
         font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        transition: border 0.2s;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        outline: none;
     }
 
-    .auth-form input:focus {
+    /* Input focus style */
+    .auth-form input[type="text"]:focus,
+    .auth-form input[type="password"]:focus,
+    .auth-form input[type="email"]:focus {
         border-color: #007bff;
-        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Option Buttons (Rectangular, Horizontal) */
+    .auth-form .radio-button-group {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .auth-form .radio-button-group label {
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        border-radius: 25px;
+        background-color: #f1f1f1;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .auth-form .radio-button-group input[type="radio"] {
+        display: none; /* Hide the actual radio buttons */
+    }
+
+    .auth-form .radio-button-group label:hover {
+        background-color: #007bff;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    /* Active radio button */
+    .auth-form .radio-button-group input[type="radio"]:checked + label {
+        background-color: #007bff;
+        color: white;
     }
 
     /* Button styles */
     .auth-form button {
-        padding: 10px;
-        font-size: 14px;
+        padding: 12px;
+        font-size: 16px;
         font-weight: bold;
         color: #fff;
         background-color: #007bff;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: background-color 0.3s ease;
+        width: 100%;
     }
 
-        .auth-form button:hover {
-            background-color: #0056b3;
+    .auth-form button:hover {
+        background-color: #0056b3;
+    }
+
+    .auth-form button.secondary {
+        background-color: #6c757d;
+    }
+
+    .auth-form button.secondary:hover {
+        background-color: #5a6268;
+    }
+
+    /* Submit button styles */
+    .auth-form .submit-btn {
+        background-color: #28a745; /* Green */
+        margin-top: 20px;
+    }
+
+    .auth-form .submit-btn:hover {
+        background-color: #218838;
+    }
+
+    /* Group buttons (spacing) */
+    .auth-button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    /* Error message styling */
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    /* Spacing between form fields */
+    .auth-form .form-field {
+        margin-bottom: 15px;
+    }
+
+    /* Make inputs and buttons responsive on small screens */
+    @media (max-width: 480px) {
+        .auth-container {
+            padding: 15px;
         }
 
-        .auth-form button.secondary {
-            background-color: #6c757d;
+        .auth-form {
+            gap: 10px;
         }
 
-            .auth-form button.secondary:hover {
-                background-color: #5a6268;
+            .auth-form button {
+                padding: 10px;
             }
 
-/* Additional button container */
-.auth-button-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
+            .auth-form .radio-button-group label {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+    }

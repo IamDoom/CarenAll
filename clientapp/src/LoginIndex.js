@@ -15,12 +15,12 @@ function App() {
     return (
         <div className="auth-container">
             {currentView === 'login' && <Login onChangeView={setCurrentView} setError={setError} />}
-            {currentView === 'signup' && <SignUp onBack={() => setCurrentView('login')} setError={setError} />}
+            {currentView === 'signup' && <SignUp onChangeView={setCurrentView} setError={setError} />}
             {currentView === 'forgotPassword' && (
                 <ForgotPassword onBack={() => setCurrentView('login')} setError={setError} />
             )}
 
-            {errorMessage && <div className="error-message">{errorMessage}</div>}  {/* Display any errors */}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
     );
 }

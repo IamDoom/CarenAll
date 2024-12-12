@@ -7,7 +7,6 @@ function Login({ onChangeView, setError }) {
         
         const response = await fetch('/api/login');
         if (response.ok) {
-            
             window.location.href = '/index';
         } else {
             setError('Invalid username or password');
@@ -15,7 +14,7 @@ function Login({ onChangeView, setError }) {
     };
 
     return (
-        <div className="auth-container">
+        <div>
             <h2>Login</h2>
             <form className="auth-form" onSubmit={handleLogin}>
                 <div>
@@ -45,7 +44,7 @@ function Login({ onChangeView, setError }) {
                     Sign Up
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
 
