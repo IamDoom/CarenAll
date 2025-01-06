@@ -22,8 +22,17 @@ public class Voertuigen
     [Required]
     public int Aanschafjaar { get; set; }
 
-    public User InUseBy { get; set; }
-    public string State { get; set; }
+    //ik raadt dit later aan
+    /* public Voertuigen(string merk, string type, string kenteken, string kleur, int aanschafjaar)
+    {
+        Merk = merk;
+        Type = type;
+        Kenteken = kenteken;
+        Kleur = kleur;
+        Aanschafjaar = aanschafjaar;
+    } */
+
+
 }
 
 public class Auto : Voertuigen

@@ -1,158 +1,213 @@
-﻿/* Container styles */
-.auth-container {
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
+﻿/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-    /* Form styles */
-    .auth-form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
+/* Container for Authentication Pages */
+.auth-container {
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%; /* Make it responsive */
+    max-width: 500px; /* Limit the maximum width */
+    text-align: center;
+    box-sizing: border-box;
+}
 
-    /* Label styles */
-    .auth-form label {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #333;
-    }
+/* Error Message */
+.error-message {
+    color: #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.1);
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #ff4d4d;
+}
 
-    /* Input fields */
-    .auth-form input[type="text"],
-    .auth-form input[type="password"],
-    .auth-form input[type="email"] {
-        padding: 12px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #fff;
-        transition: all 0.3s ease;
+/* Input Field Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        border-color: #4caf50;
         outline: none;
     }
 
-    /* Input focus style */
-    .auth-form input[type="text"]:focus,
-    .auth-form input[type="password"]:focus,
-    .auth-form input[type="email"]:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+/* Login Button Style */
+button.submit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+    button.submit:hover {
+        background-color: #45a049;
     }
 
-    /* Option Buttons (Rectangular, Horizontal) */
-    .auth-form .radio-button-group {
-        display: flex;
-        gap: 20px;
-        justify-content: space-between;
-        margin-bottom: 20px;
+/* Secondary Buttons (Sign Up / Forgot Password) */
+button.secondary {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #f4f6f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+    button.secondary:hover {
+        background-color: #e9ecef;
+        border-color: #b2b2b2;
     }
 
-    .auth-form .radio-button-group label {
-        padding: 12px 25px;
-        font-size: 16px;
-        font-weight: 600;
-        color: #333;
-        border-radius: 25px;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
+/* Link Style (for switching between views) */
+a {
+    text-decoration: none;
+    color: #4caf50;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #388e3c;
     }
 
-    .auth-form .radio-button-group input[type="radio"] {
-        display: none; /* Hide the actual radio buttons */
+/* Form Header */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Layout for Back Button in Forgot Password */
+.forgot-password-back-button {
+    font-size: 14px;
+    color: #4caf50;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+    .forgot-password-back-button:hover {
+        text-decoration: underline;
     }
 
-    .auth-form .radio-button-group label:hover {
-        background-color: #007bff;
-        color: #fff;
-        transform: scale(1.05);
+/* Media Queries for Smaller Screens */
+@media (max-width: 480px) {
+    .auth-container {
+        width: 90%; /* Make form container smaller for small screens */
+        padding: 20px;
     }
 
-    /* Active radio button */
-    .auth-form .radio-button-group input[type="radio"]:checked + label {
-        background-color: #007bff;
-        color: white;
-    }
-
-    /* Button styles */
-    .auth-form button {
-        padding: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        width: 100%;
-    }
-
-    .auth-form button:hover {
-        background-color: #0056b3;
-    }
-
-    .auth-form button.secondary {
-        background-color: #6c757d;
-    }
-
-    .auth-form button.secondary:hover {
-        background-color: #5a6268;
-    }
-
-    /* Submit button styles */
-    .auth-form .submit-btn {
-        background-color: #28a745; /* Green */
-        margin-top: 20px;
-    }
-
-    .auth-form .submit-btn:hover {
-        background-color: #218838;
-    }
-
-    /* Group buttons (spacing) */
-    .auth-button-group {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-    }
-
-    /* Error message styling */
-    .error-message {
-        color: red;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    button {
         font-size: 14px;
-        margin-top: 10px;
+        padding: 10px;
     }
 
-    /* Spacing between form fields */
-    .auth-form .form-field {
-        margin-bottom: 15px;
+        button.submit {
+            font-size: 15px; /* Slightly smaller for better mobile experience */
+        }
+}
+/* Radio Buttons Styled as Rectangular Buttons */
+.radio-buttons-container {
+    display: flex;
+    justify-content: space-between; /* Spread out radio buttons evenly */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-top: 20px;
+    gap: 10px; /* Add space between buttons */
+    width: 100%; /* Ensure they don't extend beyond container */
+    box-sizing: border-box;
+}
+
+    .radio-buttons-container label {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 8px; /* Soft rounded corners */
+        background-color: #f4f6f9;
+        color: #333;
+        font-size: clamp(10px, 3vw, 14px); /* More dynamic scaling for medium screens */
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #ccc;
+        text-align: center;
+        white-space: nowrap;
+        width: 30%; /* Allow up to 3 buttons in a row */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+        max-width: 100%; /* Prevent overflow */
     }
 
-    /* Make inputs and buttons responsive on small screens */
-    @media (max-width: 480px) {
-        .auth-container {
-            padding: 15px;
+    .radio-buttons-container input[type="radio"] {
+        display: none; /* Hide default radio button */
+    }
+
+        .radio-buttons-container input[type="radio"]:checked + label {
+            background-color: #4caf50;
+            color: white;
+            border-color: #4caf50;
         }
 
-        .auth-form {
-            gap: 10px;
-        }
-
-            .auth-form button {
-                padding: 10px;
-            }
-
-            .auth-form .radio-button-group label {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
+    .radio-buttons-container label:hover {
+        background-color: #e9ecef;
+        border-color: #b2b2b2;
     }
+
+    .radio-buttons-container input[type="radio"]:focus + label {
+        outline: 2px solid #4caf50;
+    }
+
+/* Responsive Font Size and Button Behavior for Radio Buttons */
+@media (max-width: 768px) {
+    .radio-buttons-container label {
+        font-size: clamp(10px, 4vw, 14px); /* Adjust font size more dynamically for medium screens */
+        width: 48%; /* Allow more space on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .radio-buttons-container label {
+        font-size: clamp(8px, 5vw, 12px); /* Smaller font size for mobile screens */
+        width: 48%; /* Ensure two buttons per row */
+    }
+}

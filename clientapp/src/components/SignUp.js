@@ -2,10 +2,10 @@
 import '/wwwroot/css/authStyles.css';
 
 // Individual user type forms for each case
-const SignUpParticulier = ({ onChangeView, formData, handleChange }) => (
-    <div className="auth-form">
+const SignUpParticulier = ({ onChangeView, formData, handleChange, handleSubmit }) => (
+    <form className="auth-form">
         <div className="form-field">
-            <label htmlFor="username">Gebruikersnaam</label>
+            <label htmlFor="username">Gebruikersnaam </label>
             <input
                 type="text"
                 id="username"
@@ -16,7 +16,29 @@ const SignUpParticulier = ({ onChangeView, formData, handleChange }) => (
             />
         </div>
         <div className="form-field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="firstName">Voornaam</label>
+            <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName || ''}
+                onChange={handleChange}
+                placeholder="First Name"
+            />
+        </div>
+        <div className="form-field">
+            <label htmlFor="lastName">Achternaam</label>
+            <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName || ''}
+                onChange={handleChange}
+                placeholder="Last Name"
+            />
+        </div>
+        <div className="form-field">
+            <label htmlFor="email">Email </label>
             <input
                 type="email"
                 id="email"
@@ -34,14 +56,14 @@ const SignUpParticulier = ({ onChangeView, formData, handleChange }) => (
                 name="phoneNumber"
                 value={formData.phoneNumber || ''}
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder="PhoneNumber"
             />
         </div>
-    </div>
+    </form>
 );
 
 const SignUpBedrijf = ({ formData, handleChange }) => (
-    <div className="auth-form">
+    <form className="auth-form">
         <div className="form-field">
             <label htmlFor="companyName">Bedrijf Naam</label>
             <input
@@ -75,7 +97,7 @@ const SignUpBedrijf = ({ formData, handleChange }) => (
                 placeholder="Kvk Number"
             />
         </div>
-    </div>
+    </form>
 );
 
 const SignUpZakelijkeKlant = ({ formData, handleChange }) => (
@@ -139,9 +161,9 @@ const SignUpZakelijkeKlant = ({ formData, handleChange }) => (
 );
 
 const PasswordComponent = ({ formData, handleChange, handleSubmitPassword }) => (
-    <div className="auth-form">
-        <div className="form-field">
-            <label htmlFor="password">Wachtwoord</label>
+    <form className="auth-form" onSubmit={handleSubmitPassword}>
+        <div>
+            <label htmlFor="password">Wachtwoord </label>
             <input
                 type="password"
                 id="password"
@@ -151,8 +173,8 @@ const PasswordComponent = ({ formData, handleChange, handleSubmitPassword }) => 
                 placeholder="Password"
             />
         </div>
-        <button type="submit" onClick={handleSubmitPassword}>registreer</button>
-    </div>
+        <button className="submit" type="submit" onClick={handleSubmitPassword}>registreer</button>
+    </form>
 );
 
 function SignUp({ onBack, onChangeView }) {
@@ -199,7 +221,7 @@ function SignUp({ onBack, onChangeView }) {
 
         let endpoint = '';
         if (userType === 'particulier') {
-            endpoint = '/api/particulier-pre-registration';
+            endpoint = '/api/Login/ParticulierPreRegistration';
         } else if (userType === 'bedrijf') {
             endpoint = '/api/bedrijf-pre-registration';
         } else if (userType === 'zakelijkeKlant') {
@@ -229,7 +251,7 @@ function SignUp({ onBack, onChangeView }) {
     return (
         <div className="auth-container">
             <h2>Sign Up</h2>
-            <div className="radio-button-group">
+            <div className="radio-buttons-container">
                 <input
                     type="radio"
                     id="particulier"
@@ -267,7 +289,9 @@ function SignUp({ onBack, onChangeView }) {
             {showPasswordForm ? (
                 <PasswordComponent formData={formData} handleChange={handleChange} handleSubmitPassword={handleSubmitPassword} />
             ) : (
-                <button type="submit" onClick={handleSubmit}>Verder</button>
+                <form className="auth-form">
+                        <button className="submit" type="submit" onClick={handleSubmit}>Verder</button>
+                </form>
             )}
 
             <div className="auth-button-group">

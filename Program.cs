@@ -35,4 +35,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// login user maken
+// test data maken
+
 app.Run();

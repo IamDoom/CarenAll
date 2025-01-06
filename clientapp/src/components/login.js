@@ -17,15 +17,15 @@ function Login({ onChangeView, setError }) {
         <div>
             <h2>Login</h2>
             <form className="auth-form" onSubmit={handleLogin}>
-                <div>
+                <div className="form-field">
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" name="username" />
                 </div>
-                <div>
+                <div className="form-field">
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" />
                 </div>
-                <button type="submit">Log In</button>
+                <button className="submit" type="submit">Log In</button>
             </form>
 
             <div className="auth-button-group">

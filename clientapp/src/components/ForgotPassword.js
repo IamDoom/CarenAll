@@ -10,7 +10,7 @@ function ForgotPassword({ onBack }) {
                     <label htmlFor="email">Enter your email:</label>
                     <input type="email" id="email" name="email" />
                 </div>
-                <button type="submit">Submit</button>
+                <button className="submit" type="submit">Submit</button>
             </form>
             <button type="button" className="secondary" onClick={onBack}>
                 Back to Login

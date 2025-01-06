@@ -30,6 +30,14 @@ public class AppDbContext : DbContext
     public DbSet<LeaseRequest> LeaseRequests { get; set; }
     public DbSet<DamageReport> DamageReports { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        // Add the timeout to the command execution
+        optionsBuilder.UseSqlServer("Server=LAPTOP-45FED1P9\\SQLEXPRESS;Database=CarenAllDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true", 
+            options => options.CommandTimeout(180)); 
+    }
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -52,8 +60,9 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Company>()
             .HasMany(c => c.CompanyEmployees)
             .WithOne(ce => ce.Company)
-            .HasForeignKey(ce => ce.CompanyID) 
-            .OnDelete(DeleteBehavior.Restrict); 
+            .HasForeignKey(ce => ce.EmployerID)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("FK_Company_CompanyEmployees");
 
         modelBuilder.Entity<Company>()
             .HasOne(c => c.Subscription)
@@ -64,7 +73,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<CompanyEmployee>()
             .HasOne(ce => ce.Company)
             .WithMany(c => c.CompanyEmployees)
-            .HasForeignKey(ce => ce.CompanyID)
+            .HasForeignKey(ce => ce.EmployerID)
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Subscription>()
@@ -80,27 +89,31 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<LeaseRequest>()
             .HasOne(lr => lr.Requestor)
-            .WithMany() 
+            .WithMany()
             .HasForeignKey(lr => lr.RequestorID)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasConstraintName("FK_LeaseRequest_Requestor_RequestorID");
 
         modelBuilder.Entity<LeaseRequest>()
             .HasOne(lr => lr.Company)
             .WithMany()
-            .HasForeignKey(lr => lr.CompanyID)
-            .OnDelete(DeleteBehavior.SetNull);
+            .HasForeignKey(lr => lr.RequestorCompanyID)
+            .OnDelete(DeleteBehavior.SetNull)
+            .HasConstraintName("FK_LeaseRequest_Company_CompanyID");
 
         modelBuilder.Entity<LeaseRequest>()
             .HasOne(lr => lr.Vehicle)
             .WithMany()
             .HasForeignKey(lr => lr.VehicleID)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("FK_LeaseRequest_Vehicle_VehicleID");
 
         modelBuilder.Entity<LeaseRequest>()
             .HasOne(lr => lr.Employee)
-            .WithMany() 
+            .WithMany()
             .HasForeignKey(lr => lr.EmployeeID)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasConstraintName("FK_LeaseRequest_Employee_EmployeeID");
 
         modelBuilder.Entity<DamageReport>()
             .HasOne(dr => dr.Vehicle)
@@ -121,7 +134,7 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
 
-        modelBuilder.Entity<Auto>().HasData(
+       /* modelBuilder.Entity<Auto>().HasData(
             new Auto { Id = 1, Merk = "Toyota", Type = "Corolla", Kenteken = "AB-123-CD", Kleur = "Rood", Aanschafjaar = 2018 },
             new Auto { Id = 2, Merk = "Ford", Type = "Focus", Kenteken = "EF-456-GH", Kleur = "Blauw", Aanschafjaar = 2019 },
             new Auto { Id = 3, Merk = "Volkswagen", Type = "Golf", Kenteken = "IJ-789-KL", Kleur = "Zwart", Aanschafjaar = 2020 },
@@ -314,7 +327,7 @@ public class AppDbContext : DbContext
             new Caravan { Id = 241, Merk = "Hobby", Type = "Prestige", Kenteken = "CD-123-EF", Kleur = "Grijs", Aanschafjaar = 2018 },
             new Caravan { Id = 242, Merk = "Dethleffs", Type = "C'go", Kenteken = "GH-456-IJ", Kleur = "Blauw", Aanschafjaar = 2020 },
             new Caravan { Id = 243, Merk = "Burstner", Type = "Premio Life", Kenteken = "KL-789-MN", Kleur = "Rood", Aanschafjaar = 2017 }
-        );
+        ); */ //dit moet efficienter
 
     }
 }

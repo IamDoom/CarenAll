@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Customer Dashboard</title>
+    <link rel="stylesheet" href="~/css/PrivateCustomer.css">
+</head>
+<body>
+    <div class="header">
+        <!-- React Header Component Placeholder -->
+        <h1>Customer Dashboard</h1>
+    </div>
+    <div class="main-container">
+        <div class="left-section">
+            <div class="account-card">
+                <h2>Account Info</h2>
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Email:</strong> john.doe@example.com</p>
+                <p><strong>Status:</strong> Active</p>
+                <button class="btn-action" onclick="showMessages()">Messages</button>
+                <button class="btn-action" onclick="showStatus()">Change Status</button>
+            </div>
+        </div>
+        <div class="center-section">
+            <div id="dynamic-content">
+                <!-- Dynamic content (e.g., calendar, messages) will appear here -->
+                <p>Select an action to display content here.</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="scrollable-cards">
+                <div class="card" onclick="showCalendar()">
+                    <h3>Vehicle 1</h3>
+                    <p>Make: Toyota</p>
+                    <p>Model: Corolla</p>
+                    <p>Year: 2022</p>
+                    <button class="btn-lease">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 2</h3>
+                    <p>Make: Honda</p>
+                    <p>Model: Civic</p>
+                    <p>Year: 2021</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 3</h3>
+                    <p>Make: Ford</p>
+                    <p>Model: Mustang</p>
+                    <p>Year: 2020</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 4</h3>
+                    <p>Make: Chevrolet</p>
+                    <p>Model: Malibu</p>
+                    <p>Year: 2019</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 5</h3>
+                    <p>Make: BMW</p>
+                    <p>Model: 3 Series</p>
+                    <p>Year: 2022</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 6</h3>
+                    <p>Make: Audi</p>
+                    <p>Model: A4</p>
+                    <p>Year: 2021</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 7</h3>
+                    <p>Make: Tesla</p>
+                    <p>Model: Model 3</p>
+                    <p>Year: 2023</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 8</h3>
+                    <p>Make: Nissan</p>
+                    <p>Model: Altima</p>
+                    <p>Year: 2020</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 9</h3>
+                    <p>Make: Mercedes</p>
+                    <p>Model: C-Class</p>
+                    <p>Year: 2021</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 10</h3>
+                    <p>Make: Hyundai</p>
+                    <p>Model: Elantra</p>
+                    <p>Year: 2018</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 11</h3>
+                    <p>Make: Subaru</p>
+                    <p>Model: Impreza</p>
+                    <p>Year: 2022</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+                <div class="card">
+                    <h3>Vehicle 12</h3>
+                    <p>Make: Volkswagen</p>
+                    <p>Model: Passat</p>
+                    <p>Year: 2019</p>
+                    <button class="btn-lease" onclick="showCalendar()">Lease Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <!-- React Footer Component Placeholder -->
+        <p>© 2025 Your Company</p>
+    </div>
+    <script>
+        function showCalendar() {
+            const content = document.getElementById('dynamic-content');
+            content.innerHTML = '<h3>Lease Calendar</h3><p>Select a date for your lease.</p>';
+        }
+
+        function showMessages() {
+            const content = document.getElementById('dynamic-content');
+            content.innerHTML = '<h3>Messages</h3><p>You have no new messages.</p>';
+        }
+
+        function showStatus() {
+            const content = document.getElementById('dynamic-content');
+            content.innerHTML = '<h3>Change Status</h3><p>Change your account status here.</p>';
+        }
+    </script>
+</body>
+</html>

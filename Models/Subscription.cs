@@ -1,7 +1,11 @@
-﻿namespace CarenAll.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace CarenAll.Models
 {
     public class Subscription
     {
+        [Key]
         public int SubcriptionID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -15,9 +19,12 @@
 
     public class SubscriptionUpdate //model for logging changes made by which employee
     {
+        [Key]
         public int UpdateID { get; set; }
+        [Required]
         public DateTime UpdateTime { get; set; }
-        public string UpdatedByEmployeeID { get; set; } 
+        [Required]
+        public int UpdatedByEmployeeID { get; set; } 
 
     }
 }

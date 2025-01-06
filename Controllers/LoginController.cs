@@ -8,9 +8,14 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore.Query;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CarenAll.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class LoginController : Controller
     {
 
@@ -25,17 +30,18 @@ namespace CarenAll.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login([FromBody] Credentials CredDto)
         {
             var credentials = await _loginDbContext.Credentials
-                .FirstOrDefaultAsync(c => c.Username == username);
+                .FirstOrDefaultAsync(c => c.Username == CredDto.Username);
+
             if (credentials == null)
             {
                 
                 ModelState.AddModelError("", "Invalid username or password.");
                 return View("login"); //i need to add login errors.
             }
-            if (!PasswordCheck(password, credentials.PasswordHash))
+            if (!PasswordCheck(CredDto.PasswordHash, credentials.PasswordHash))
             {
                 
                 ModelState.AddModelError("", "Invalid username or password.");
@@ -59,6 +65,77 @@ namespace CarenAll.Controllers
             return View("login");
         }
 
+        
+        /* public async Task<IActionResult> ParticulierPreRegistration([FromBody] PrivateClient RegisterDto)
+        {
+            if (await _loginDbContext.Credentials.AnyAsync(c => c.Username == RegisterDto.Email))
+            {
+                return BadRequest("Username already exists.");
+            }
+
+            if (await _appDbContext.Users.AnyAsync(u => u.Email == RegisterDto.Email))
+            {
+                return BadRequest("Email already exists.");
+            }
+
+            if (await _appDbContext.PrivateClients.AnyAsync(u => u.PhoneNumber == RegisterDto.PhoneNumber))
+            {
+                return BadRequest("Phone number already exists.");
+            }
+
+            return Ok("Pre-registration checks passed.");
+        } */
+
+        [HttpPost("register")] 
+        public async Task<IActionResult> RegisterPrivateClient(string username, string password, string email, string phonenumber) //deze functie is veroudert en moet bijgewerkt worden.
+        {
+            if (await _loginDbContext.Credentials.AnyAsync(c => c.Username == username))
+            {
+                ModelState.AddModelError("", "Username already exists.");
+                return View("login");
+            }
+            if (await _appDbContext.PrivateClients.AnyAsync(u => u.Email == email))
+            {
+                ModelState.AddModelError("", "this email already exists");
+                return View("login");
+            }
+            var userId = Guid.NewGuid();
+
+            var salt = new byte[16];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            var hashedPassword = KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8);
+
+            var passwordHash = Convert.ToBase64String(salt.Concat(hashedPassword).ToArray());
+
+            var user = new PrivateClient
+            {
+                Id = userId.GetHashCode(),
+                Email = email,
+                PhoneNumber = phonenumber,
+                FirstName = "FirstName",
+                LastName = "LastName"
+            };
+            var credentials = new Credentials(user.Id, username, passwordHash);
+
+            // opslaan in de db
+            await _appDbContext.Users.AddAsync(user);
+            await _loginDbContext.Credentials.AddAsync(credentials);
+
+            await _appDbContext.SaveChangesAsync();
+            await _loginDbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
+
+        }
         //functie gegenereert door chatgpt
         private bool PasswordCheck(string input, string saved) 
         {
@@ -76,5 +153,14 @@ namespace CarenAll.Controllers
             // Compare the computed hash with the stored hash
             return hashBytes.SequenceEqual(hash);
         }
+
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("LoginController is working!");
+        }
+
     }
+
+
 }
