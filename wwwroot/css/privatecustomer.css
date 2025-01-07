@@ -61,10 +61,3 @@
     background-color: #fff; /* Optional styling for visibility */
 }
 
-.scrollable-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-}

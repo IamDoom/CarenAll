@@ -1,9 +1,11 @@
 ﻿.scrollable-cards {
     display: flex;
     flex-direction: column; /* Stack cards vertically */
-    gap: 20px; /* Space between cards */
-    max-height: 80vh; /* Limit height to 80% of the viewport */
+    gap: 20px; /* Add space between cards */
     overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    max-height: 80vh; /* Limit the height to fit within the viewport */
+    width: 100%; /* Ensure the container takes full width */
     padding: 10px;
     box-sizing: border-box;
 }
@@ -12,9 +14,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
-    width: 200px;
+    width: 100%; /* Card takes full width of the container */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    background-color: #fff;
+    text-align: left; /* Align text to the left */
 }
 
     .card h3 {
