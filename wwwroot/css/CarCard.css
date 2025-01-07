@@ -1,8 +1,11 @@
 ﻿.scrollable-cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    overflow-y: auto;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px; /* Space between cards */
+    max-height: 80vh; /* Limit height to 80% of the viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .card {

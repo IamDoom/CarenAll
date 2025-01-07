@@ -126,7 +126,7 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
 
-        modelBuilder.Entity<Auto>().HasData(
+       /* modelBuilder.Entity<Auto>().HasData(
             new Auto { Id = 1, Merk = "Toyota", Type = "Corolla", Kenteken = "AB-123-CD", Kleur = "Rood", Aanschafjaar = 2018 },
             new Auto { Id = 2, Merk = "Ford", Type = "Focus", Kenteken = "EF-456-GH", Kleur = "Blauw", Aanschafjaar = 2019 },
             new Auto { Id = 3, Merk = "Volkswagen", Type = "Golf", Kenteken = "IJ-789-KL", Kleur = "Zwart", Aanschafjaar = 2020 },
@@ -319,7 +319,7 @@ public class AppDbContext : DbContext
             new Caravan { Id = 241, Merk = "Hobby", Type = "Prestige", Kenteken = "CD-123-EF", Kleur = "Grijs", Aanschafjaar = 2018 },
             new Caravan { Id = 242, Merk = "Dethleffs", Type = "C'go", Kenteken = "GH-456-IJ", Kleur = "Blauw", Aanschafjaar = 2020 },
             new Caravan { Id = 243, Merk = "Burstner", Type = "Premio Life", Kenteken = "KL-789-MN", Kleur = "Rood", Aanschafjaar = 2017 }
-        );
+        ); */
 
     }
 }
