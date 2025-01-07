@@ -6,6 +6,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
     mode: 'development',
     entry: {
+        privatecustomer: './clientapp/src/PrivateCustomerApp.js', //tussentijds tot de index wordt gefixed
         login: './clientapp/src/LoginIndex.js', // Entry for the Login page (Login SPA)
         app: './clientapp/src/index.js',         // Entry for the main app
     },

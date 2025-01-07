@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+    <link rel="stylesheet" href="~/css/Company.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="dashboard-sidebar">
+            <h2>Company Information</h2>
+            <div class="company-info">
+                <p><strong>Name:</strong> Company Name</p>
+                <p><strong>Address:</strong> 123 Main Street</p>
+                <p><strong>KvK:</strong> 12345678</p>
+                <p><strong>Subscription:</strong> Premium Plan</p>
+                <button class="btn-edit">Edit Company Info</button>
+                <button class="btn-subscription">Edit Subscription</button>
+            </div>
+            <div class="outstanding-payments">
+                <h3>Outstanding Payments</h3>
+                <p><strong>Credit Balance:</strong> $500</p>
+                <p><strong>Due Amount:</strong> $150</p>
+                <button class="btn-pay">Settle Payments</button>
+            </div>
+            <div class="pending-requests">
+                <h3>Pending Requests</h3>
+                <ul class="request-list">
+                    <li class="request-item">
+                        <p><strong>John Doe</strong>: Request to join company</p>
+                        <button class="btn-approve">Approve</button>
+                        <button class="btn-deny">Deny</button>
+                    </li>
+                    <li class="request-item">
+                        <p><strong>Jane Smith</strong>: Request to join company</p>
+                        <button class="btn-approve">Approve</button>
+                        <button class="btn-deny">Deny</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Company Dashboard</h1>
+            </div>
+
+            <div class="employee-table">
+                <h2>Employees</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>Manager</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td>Jane</td>
+                            <td>Smith</td>
+                            <td>Developer</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="lease-requests">
+                <h2>Pending Lease Requests</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Requested Vehicle</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Tesla Model 3</td>
+                            <td>
+                                <button class="btn-approve">Approve</button>
+                                <button class="btn-deny">Deny</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Ford Mustang</td>
+                            <td>
+                                <button class="btn-approve">Approve</button>
+                                <button class="btn-deny">Deny</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

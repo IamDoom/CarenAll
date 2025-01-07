@@ -1,0 +1,23 @@
+﻿<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Merk</th>
+            <th>Type</th>
+            <th>Kenteken</th>
+            <th>Kleur</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.Id</td>
+                <td>@vehicle.Merk</td>
+                <td>@vehicle.Type</td>
+                <td>@vehicle.Role</td>
+                <td>@vehicle.Kleur</td>
+            </tr>
+        }
+    </tbody>
+</table>
