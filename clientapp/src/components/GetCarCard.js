@@ -1,6 +1,8 @@
 ﻿import React, { useEffect, useState } from "react";
 import '/wwwroot/css/CarCard.css'
 
+
+
 const GetCarCards = () => {
     const [cars, setCars] = useState([]);
 
@@ -15,7 +17,7 @@ const GetCarCards = () => {
     }, []);
 
     const showCalendar = (carId) => {
-        // Handle the "Lease Now" button click
+        
         console.log(`Show calendar for car ID: ${carId}`);
     };
 
