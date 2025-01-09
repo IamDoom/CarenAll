@@ -1,14 +1,16 @@
-﻿import React, { useEffect, useState } from "react";
+﻿﻿import React, { useEffect, useState } from "react";
 import '/wwwroot/css/CarCard.css'
 
 const GetCarCards = () => {
     const [cars, setCars] = useState([]);
 
     useEffect(() => {
-        // Fetch car data from the API
         fetch("/GetAllVehicles")
             .then(response => response.json())
-            .then(data => setCars(data))
+            .then(data => {
+                console.log("Fetched Data:", data); // Debug: Log fetched JSON data
+                setCars(data);
+            })
             .catch(error => console.error("Error fetching cars:", error));
     }, []);
 
@@ -19,14 +21,21 @@ const GetCarCards = () => {
 
     return (
         <div className="scrollable-cards">
-            {cars.map(car => (
-                <div className="card" key={car.Id} onClick={() => showCalendar(car.Id)}>
-                    <h3>{car.Merk} {car.Type}</h3>
-                    <p>Kleur: {car.Kleur}</p>
-                    <p>Kenteken: {car.Kenteken}</p>
-                    <button className="btn-lease">Lease Now</button>
-                </div>
-            ))}
+            {Array.isArray(cars) && cars.length > 0 ? (
+                cars.map((car, index) => {
+                    console.log("Rendering car:", car); // Debug: Log each car being rendered
+                    return (
+                        <div className="card" key={car.id || `car-${index}`}>
+                            <h3>{car.merk} {car.type}</h3>
+                            <p>Kleur: {car.kleur}</p>
+                            <p>Kenteken: {car.kenteken}</p>
+                            <button className="btn-lease" onClick={() => showCalendar(car.Id)}>Lease Now</button>
+                        </div>
+                    );
+                })
+            ) : (
+                <p>No cars available</p>
+            )}
         </div>
     );
 }; 

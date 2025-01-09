@@ -1,0 +1,35 @@
+@model YourNamespace.Models.UserViewModel
+
+<div class="main-container">
+    <div class="left-section">
+        <div class="profile-card">
+            <h2>Account Informatie</h2>
+            <p><strong>Name:</strong> @Model.Name</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Status:</strong> @Model.Status</p>
+            <button class="btn-action" onclick="showMessages()">Messages</button>
+            <button class="btn-action" onclick="showProfileData()">Change Profile Data</button>
+        </div>
+    </div>
+    <div class="center-section">
+        <div id="dynamic-content">
+            <!-- Dynamic content (e.g., calendar, messages) will appear here -->
+            <p>Select an action to display content here.</p>
+        </div>
+    </div>
+    <div class="right-section">
+        <div id="GetCarCards"></div>
+    </div>
+</div>
+
+<script>
+    function showMessages() {
+        const content = document.getElementById('dynamic-content');
+        content.innerHTML = '<h3>Messages</h3><p>You have no new messages.</p>';
+    }
+
+    function showProfileData() {
+        const content = document.getElementById('dynamic-content');
+        content.innerHTML = '<h3>Change Profile Data</h3><p>Here you can update your profile data.</p>';
+    }
+</script>

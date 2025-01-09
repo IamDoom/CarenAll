@@ -1,3 +1,4 @@
+﻿﻿
 ﻿body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,23 +8,27 @@
     background-color: #f9f9f9;
 }
 
+
 .header, .footer {
     background-color: #4CAF50;
     color: white;
     text-align: center;
     padding: 15px;
+    height: 60px; /* Fixed height for header and footer */
 }
 
 .main-container {
     display: flex;
     flex: 1;
-    padding: 20px;
     gap: 20px;
+    padding: 10px;
+    overflow: hidden; /* Prevent main container from expanding beyond the viewport */
 }
 
 .left-section, .center-section, .right-section {
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Prevent overflow for individual sections */
 }
 
 .left-section {
@@ -50,7 +55,22 @@
 
 .right-section {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 120px); /* Subtract header and footer height */
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff; /* Optional styling for visibility */
 }
+
+.btn-action {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-action:hover {
+        background-color: #0056b3;
+    }

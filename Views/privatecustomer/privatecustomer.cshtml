@@ -14,12 +14,12 @@
     <div class="main-container">
         <div class="left-section">
             <div class="account-card">
-                <h2>Account Info</h2>
+                <h2>Account Informatie</h2>
                 <p><strong>Name:</strong> John Doe</p>
                 <p><strong>Email:</strong> john.doe@example.com</p>
                 <p><strong>Status:</strong> Active</p>
                 <button class="btn-action" onclick="showMessages()">Messages</button>
-                <button class="btn-action" onclick="showStatus()">Change Status</button>
+                <button class="btn-action" onclick="showProfileData()">Change Profile Data</button>
             </div>
         </div>
         <div class="center-section">
@@ -48,9 +48,9 @@
             content.innerHTML = '<h3>Messages</h3><p>You have no new messages.</p>';
         }
 
-        function showStatus() {
+        function showProfileData() {
             const content = document.getElementById('dynamic-content');
-            content.innerHTML = '<h3>Change Status</h3><p>Change your account status here.</p>';
+            content.innerHTML = '<h3>Change Profile Data</h3><p>Change your profile data here.</p>';
         }
     </script>
     <script src="~/js/privatecustomer.bundle.js"></script>
