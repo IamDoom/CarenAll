@@ -2,6 +2,7 @@
 using CarenAll.data;
 using CarenAll.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarenAll.Controllers
 {
@@ -18,6 +19,31 @@ namespace CarenAll.Controllers
             _loginDbContext = loginDbContext;
             _appDbContext = appDbContext;
 
+        }
+        [HttpGet("getprivateinfo")]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var userID = HttpContext.Session.GetInt32("userID");
+            if (userID == null)
+            {
+                return Unauthorized(new {message = "user not logged in"});
+            }
+
+            var data = await _appDbContext.PrivateClients
+                .Where(u => u.Id == userID)
+                .Select(u => new
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber
+                })
+                .FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
         }
         public IActionResult Index()
         {

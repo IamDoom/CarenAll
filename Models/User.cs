@@ -49,4 +49,14 @@ namespace CarenAll.Models
         public Subscription? Subscription { get; set; }
         public ICollection<LeaseRequest> LeaseRequests { get; set; }
     }
+
+    public class PrivateClientDto
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string firstname {  get; set; }
+        public string lastname { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+    }
 }

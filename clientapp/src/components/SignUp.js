@@ -2,8 +2,8 @@
 import '/wwwroot/css/authStyles.css';
 
 // Individual user type forms for each case
-const SignUpParticulier = ({ onChangeView, formData, handleChange, handleSubmit }) => (
-    <form className="auth-form">
+const SignUpParticulier = ({ formData, handleChange, handleSubmit }) => (
+    <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-field">
             <label htmlFor="username">Gebruikersnaam </label>
             <input
@@ -59,11 +59,23 @@ const SignUpParticulier = ({ onChangeView, formData, handleChange, handleSubmit 
                 placeholder="PhoneNumber"
             />
         </div>
+        <div className="form-field">
+            <label htmlFor="password">Wachtwoord</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password || ''}
+                onChange={handleChange}
+                placeholder="Password"
+            />
+        </div>
+        <button className="submit" type="submit">Registreer</button>
     </form>
 );
 
-const SignUpBedrijf = ({ formData, handleChange }) => (
-    <form className="auth-form">
+const SignUpBedrijf = ({ formData, handleChange, handleSubmit }) => (
+    <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-field">
             <label htmlFor="companyName">Bedrijf Naam</label>
             <input
@@ -97,11 +109,23 @@ const SignUpBedrijf = ({ formData, handleChange }) => (
                 placeholder="Kvk Number"
             />
         </div>
+        <div className="form-field">
+            <label htmlFor="password">Wachtwoord</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password || ''}
+                onChange={handleChange}
+                placeholder="Password"
+            />
+        </div>
+        <button className="submit" type="submit">Registreer</button>
     </form>
 );
 
-const SignUpZakelijkeKlant = ({ formData, handleChange }) => (
-    <div className="auth-form">
+const SignUpZakelijkeKlant = ({ formData, handleChange, handleSubmit }) => (
+    <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-field">
             <label htmlFor="username">Gebruikers Naam</label>
             <input
@@ -157,13 +181,8 @@ const SignUpZakelijkeKlant = ({ formData, handleChange }) => (
                 placeholder="Company ID"
             />
         </div>
-    </div>
-);
-
-const PasswordComponent = ({ formData, handleChange, handleSubmitPassword }) => (
-    <form className="auth-form" onSubmit={handleSubmitPassword}>
-        <div>
-            <label htmlFor="password">Wachtwoord </label>
+        <div className="form-field">
+            <label htmlFor="password">Wachtwoord</label>
             <input
                 type="password"
                 id="password"
@@ -173,7 +192,7 @@ const PasswordComponent = ({ formData, handleChange, handleSubmitPassword }) => 
                 placeholder="Password"
             />
         </div>
-        <button className="submit" type="submit" onClick={handleSubmitPassword}>registreer</button>
+        <button className="submit" type="submit">Registreer</button>
     </form>
 );
 
@@ -181,7 +200,6 @@ function SignUp({ onBack, onChangeView }) {
     const [formData, setFormData] = useState({});
     const [userType, setUserType] = useState('particulier');
     const [errorMessage, setErrorMessage] = useState('');
-    const [showPasswordForm, setShowPasswordForm] = useState(false);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -191,37 +209,13 @@ function SignUp({ onBack, onChangeView }) {
         }));
     };
 
-    const handleSubmitPassword = async (event) => {
-        event.preventDefault();
-        setErrorMessage('');
-
-        try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ ...formData, password: formData.password }),
-            });
-            const result = await response.json();
-            if (response.ok) {
-                alert('Registration successful!');
-            } else {
-                setErrorMessage(result.message || 'An error occurred during registration.');
-            }
-        }
-        catch (error) {
-            setErrorMessage('Network error, please try again later.');
-        }
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setErrorMessage('');
 
         let endpoint = '';
         if (userType === 'particulier') {
-            endpoint = '/api/Login/ParticulierPreRegistration';
+            endpoint = '/api/Login/ParticulierRegistration';
         } else if (userType === 'bedrijf') {
             endpoint = '/api/bedrijf-pre-registration';
         } else if (userType === 'zakelijkeKlant') {
@@ -234,12 +228,19 @@ function SignUp({ onBack, onChangeView }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                    firstname: formData.firstName,
+                    lastname: formData.lastName,
+                    email: formData.email,
+                    phoneNumber: formData.phoneNumber
+                }),
             });
 
             const result = await response.json();
             if (response.ok) {
-                setShowPasswordForm(true);
+                alert('Registration successful!');
             } else {
                 setErrorMessage(result.message || 'An error occurred during registration.');
             }
@@ -280,19 +281,11 @@ function SignUp({ onBack, onChangeView }) {
                 <label htmlFor="zakelijkeKlant">Zakelijke klant</label>
             </div>
 
-            {userType === 'particulier' && <SignUpParticulier formData={formData} handleChange={handleChange} />}
-            {userType === 'bedrijf' && <SignUpBedrijf formData={formData} handleChange={handleChange} />}
-            {userType === 'zakelijkeKlant' && <SignUpZakelijkeKlant formData={formData} handleChange={handleChange} />}
+            {userType === 'particulier' && <SignUpParticulier formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />}
+            {userType === 'bedrijf' && <SignUpBedrijf formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />}
+            {userType === 'zakelijkeKlant' && <SignUpZakelijkeKlant formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />}
 
             {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-            {showPasswordForm ? (
-                <PasswordComponent formData={formData} handleChange={handleChange} handleSubmitPassword={handleSubmitPassword} />
-            ) : (
-                <form className="auth-form">
-                        <button className="submit" type="submit" onClick={handleSubmit}>Verder</button>
-                </form>
-            )}
 
             <div className="auth-button-group">
                 <button

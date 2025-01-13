@@ -1,0 +1,110 @@
+using Microsoft.AspNetCore.Mvc;
+using CarAndAll.Application.Services;
+using CarAndAll.Core.Domain.Entities;
+using System;
+using System.Threading.Tasks;
+
+namespace CarAndAll.API.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class RentalTransactionController : ControllerBase
+    {
+        private readonly RentalTransactionService _rentalTransactionService;
+        private readonly UserService _userService;
+
+        public RentalTransactionController(RentalTransactionService rentalTransactionService, UserService userService)
+        {
+            _rentalTransactionService = rentalTransactionService;
+            _userService = userService;
+        }
+
+        [HttpPost("CreateRequest")]
+        public async Task<IActionResult> CreateRentalRequest(Guid customerId, Guid vehicleId, DateTime startDate, DateTime endDate)
+        {
+            var result = await _rentalTransactionService.CreateRentalRequestAsync(customerId, vehicleId, startDate, endDate);
+            if (result.Contains("not"))
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPut("Approve/{rentalId}/{employeeId}")]
+        public async Task<IActionResult> ApproveRentalRequest(Guid rentalId, Guid employeeId)
+        {
+            var employee = await _userService.GetEmployeeByIdAsync(employeeId);
+            if (employee == null || employee.Role != EmployeeRole.BackOffice)
+            {
+                return Unauthorized("Access denied. Only BackOffice employees can approve requests.");
+            }
+
+            var result = await _rentalTransactionService.ApproveRentalRequestAsync(rentalId, employeeId);
+            if (result.Contains("denied") || result.Contains("not"))
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPut("Decline/{rentalId}/{employeeId}")]
+        public async Task<IActionResult> DeclineRentalRequest(Guid rentalId, Guid employeeId)
+        {
+            var employee = await _userService.GetEmployeeByIdAsync(employeeId);
+            if (employee == null || employee.Role != EmployeeRole.BackOffice)
+            {
+                return Unauthorized("Access denied. Only BackOffice employees can decline requests.");
+            }
+
+            var result = await _rentalTransactionService.DeclineRentalRequestAsync(rentalId, employeeId);
+            if (result.Contains("denied") || result.Contains("not"))
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> GetRentalTransaction(Guid id)
+        {
+            var rentalTransaction = await _rentalTransactionService.GetRentalTransactionByIdAsync(id);
+            if (rentalTransaction == null)
+            {
+                return NotFound("Rental transaction not found.");
+            }
+            return Ok(rentalTransaction);
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllRentalTransactions()
+        {
+            var transactions = await _rentalTransactionService.GetAllRentalTransactionsAsync();
+            return Ok(transactions);
+        }
+
+        [HttpDelete("Cancel/{id}")]
+        public async Task<IActionResult> CancelRentalTransaction(Guid id)
+        {
+            var result = await _rentalTransactionService.CancelRentalTransactionAsync(id);
+            if (result.Contains("not"))
+            {
+                return NotFound(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("GetByCustomer/{customerId}")]
+        public async Task<IActionResult> GetTransactionsByCustomer(Guid customerId)
+        {
+            var transactions = await _rentalTransactionService.GetTransactionsByCustomerIdAsync(customerId);
+            return Ok(transactions);
+        }
+
+        [HttpGet("GetPendingRequests")]
+        public async Task<IActionResult> GetPendingRentalRequests()
+        {
+            var pendingRequests = await _rentalTransactionService.GetPendingRentalRequestsAsync();
+            return Ok(pendingRequests);
+        }
+    }
+}

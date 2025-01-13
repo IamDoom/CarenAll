@@ -21,12 +21,13 @@ namespace CarenAll.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpPost]
+        [HttpPost("InitialRequest")]
         public IActionResult InitiateLeaseRequest([FromBody] Voertuigen Voertuigdto, [FromBody] User userdto)
         {
             /* if (Voertuigdto == null || userdto == null)
             {
                 return BadRequest("Invalid vehicle or user data.");
+
             } */
 
             var partialrequest = new LeaseRequest
@@ -58,6 +59,12 @@ namespace CarenAll.Controllers
              .ToList(); 
             //gotta finish this properly to display the proper info for employees
             return Json(leaserequests);
+        }
+
+        public IActionResult CreateLeaseRequest([FromBody] LeaseRequest requestdto)
+        {
+
+            return Ok();
         }
         
         

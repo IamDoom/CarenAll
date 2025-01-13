@@ -30,5 +30,20 @@ namespace CarenAll.Controllers
                 .ToList();
             return Json(vehicles);
         }
+        [HttpPost("selectVehicleType")]
+        public IActionResult SelectType()
+        {
+            if (string.IsNullOrEmpty(request.Type))
+                return BadRequest("Vehicle type is required.");
+
+            // Return mock data or fetch available vehicle models from the database
+            var availableVehicles = new List<object>
+            {
+                new { Id = 1, Model = "Sedan A", Type = request.Type },
+                new { Id = 2, Model = "Sedan B", Type = request.Type }
+            };
+
+            return Ok(availableVehicles);
+        }
     }
 }

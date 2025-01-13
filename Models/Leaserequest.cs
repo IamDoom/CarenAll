@@ -28,5 +28,9 @@ namespace CarenAll.Models
         [Required]
         public int ExpectedDistanceInKM { get; set; }
 
+        public LeaseRequest()
+        {
+
+        }
     }
 }

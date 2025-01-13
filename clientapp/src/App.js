@@ -1,11 +1,13 @@
-﻿import React from 'react';
+﻿import React from "react";
+import ProfileCard from "./components/profilecard";
 
-const App = () => {
+function App() {
     return (
-        <div>
-            <h1>Hello, tests</h1>
+        <div className="App">
+            <h1>Welcome to Your Dashboard</h1>
+            <ProfileCard />
         </div>
     );
-};
+}
 
 export default App;

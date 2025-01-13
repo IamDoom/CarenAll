@@ -6,15 +6,18 @@ namespace CarenAll.Models
         [Key]
         public int Id {  get; set; }
 
+        public int RefID { get; set; }
+
         [Required(ErrorMessage ="Gebruikersnaam is verplicht"),MaxLength(100)]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Wachtwoord is verplicht"),MaxLength(100)]
         public string PasswordHash { get; set; }  // Store hashed password
 
-        public Credentials(int ID, string username, string passwordHash) 
+        public Credentials() { }
+        public Credentials(string username, string passwordHash) 
         {
-            Id = ID;
+            
             Username = username;
             PasswordHash = passwordHash;
         }

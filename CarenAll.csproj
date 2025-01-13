@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="clientapp\src\api\" />
     <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
