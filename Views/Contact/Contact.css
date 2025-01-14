@@ -1,0 +1,16 @@
+.contact-container h2 {
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+.contact p {
+    margin-bottom: 10px
+}
+
+.contact-container p {
+    font-size: 1.25rem;
+}
+
+#mail{
+    color: rgb(33, 37, 41);
+}

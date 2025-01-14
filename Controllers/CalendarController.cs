@@ -1,4 +1,4 @@
-﻿using CarenAll.data;
+﻿/*using CarenAll.data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarenAll.Controllers
@@ -22,3 +22,4 @@ namespace CarenAll.Controllers
 
     }
 }
+*/

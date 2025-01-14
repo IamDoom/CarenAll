@@ -31,7 +31,7 @@ const GetCarCards = () => {
                             <h3>{car.merk} {car.type}</h3>
                             <p>Kleur: {car.kleur}</p>
                             <p>Kenteken: {car.kenteken}</p>
-                            <button className="btn-lease" onClick={() => showCalendar(car.Id)}>Lease Now</button>
+                            <button className="btn-lease" onClick={() => showCalendar(car.Id)}>Bekijk specificaties</button>
                         </div>
                     );
                 })

@@ -1,0 +1,13 @@
+.nav-bar {
+    background-color: #2B50EC;
+}
+
+.nav-bar-item {
+    font-size: 23px;
+    color: white;
+    margin-right: 50px;
+}
+
+.dropdown-menu {
+    min-width: 300px;
+}

@@ -1,6 +1,8 @@
-﻿using CarenAll.data;
+﻿﻿using CarenAll.data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarenAll.Controllers
 {
@@ -13,12 +15,12 @@ namespace CarenAll.Controllers
         {
             _loginDbContext = loginDbContext;
             _appDbContext = appDbContext;
-
         }
+
         [HttpGet("GetAllVehicles")]
         public async Task<IActionResult> GetAllVehicles()
         {
-            var vehicles = _appDbContext.Vehicles
+            var vehicles = await _appDbContext.Vehicles
                 .Select(e => new
                 {
                     e.Id,
@@ -27,23 +29,9 @@ namespace CarenAll.Controllers
                     e.Kenteken,
                     e.Kleur
                 })
-                .ToList();
+                .ToListAsync(); // Gebruik ToListAsync voor asynchrone query
+
             return Json(vehicles);
-        }
-        [HttpPost("selectVehicleType")]
-        public IActionResult SelectType()
-        {
-            if (string.IsNullOrEmpty(request.Type))
-                return BadRequest("Vehicle type is required.");
-
-            // Return mock data or fetch available vehicle models from the database
-            var availableVehicles = new List<object>
-            {
-                new { Id = 1, Model = "Sedan A", Type = request.Type },
-                new { Id = 2, Model = "Sedan B", Type = request.Type }
-            };
-
-            return Ok(availableVehicles);
         }
     }
 }
